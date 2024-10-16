@@ -1,1 +1,1 @@
-Communication application like Discord. (Will be)
+Voice, video and text chat app like Discord (Will be)
