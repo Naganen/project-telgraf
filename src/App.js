@@ -15,7 +15,6 @@ export default function App() {
     return (
       <>
         <Mainpage logout={logout} />
-        
       </>
     );
   } else {

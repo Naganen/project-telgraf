@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-function Login({ sendLoginID, sendLogin }) {
+function Login({ sendLogin }) {
 
-    const [loginID, setLoginID] = useState("");
     const [error, setError] = useState("");
     const [panelType, setPanelType] = useState(false);
 
@@ -22,7 +21,7 @@ function Login({ sendLoginID, sendLogin }) {
 
         fetch("http://localhost/telgraf-server/auth.php", fetchOptions)
             .then(res => res.json())
-            .then(data => (data.split(" ")[0] == "OK") ? (sendLogin(true), document.cookie = "userToken=" + data.split(" ")[1]) : setError(data))
+            .then(data => (data.split(" ")[0] === "OK") ? (sendLogin(true), document.cookie = "userToken=" + data.split(" ")[1]) : setError(data))
     }
 
     function register() {
@@ -34,7 +33,7 @@ function Login({ sendLoginID, sendLogin }) {
             body: JSON.stringify({ username: username, password: password })
         };
 
-        if (document.getElementById("regpassword").value == document.getElementById("regpasswordr").value) {
+        if (document.getElementById("regpassword").value === document.getElementById("regpasswordr").value) {
             fetch("http://localhost/telgraf-server/reg.php", fetchOptions)
                 .then(res => res.json())
                 .then(data => setError(data))
@@ -48,10 +47,10 @@ function Login({ sendLoginID, sendLogin }) {
     const loginPanel = (
         <>
             <p>Giriş Yap</p>
-            {(error == "" ? "" : <p className="text-info">{error}</p>)}
+            {(error === "" ? "" : <p className="text-info">{error}</p>)}
             <input className="m-1 form-control" placeholder="Kullanıcı Adı" id="loginusername" type="text" />
             <input className="m-1 form-control" placeholder="Şifre" id="loginpassword" type="password" />
-            <a className="m-1 w-100  btn btn-dark link-info" onClick={setPanel}>Hesabın yok mu? Buraya tıkla.</a>
+            <p className="m-1 w-100  btn btn-dark link-info" onClick={setPanel}>Hesabın yok mu? Buraya tıkla.</p>
             <button className="m-1 btn btn-outline-secondary w-100" id="loginBtn" onClick={login}>Giriş Yap</button>
         </>
     );
@@ -59,11 +58,11 @@ function Login({ sendLoginID, sendLogin }) {
     const registerPanel = (
         <>
             <p>Kayıt Ol</p>
-            {(error == "" ? "" : <p className="text-info">{error}</p>)}
+            {(error === "" ? "" : <p className="text-info">{error}</p>)}
             <input className="m-1 form-control" placeholder="Kullanıcı Adı" id="regusername" type="text" />
             <input className="m-1 form-control" placeholder="Şifre" id="regpassword" type="password" />
             <input className="m-1 form-control" placeholder="Şifre Tekrar" id="regpasswordr" type="password" />
-            <a className="m-1 w-100 btn btn-dark link-info" onClick={setPanel}>Hesabın Var Mı? Buraya tıkla.</a>
+            <p className="m-1 w-100 btn btn-dark link-info" onClick={setPanel}>Hesabın Var Mı? Buraya tıkla.</p>
             <button className="m-1 btn btn-outline-secondary w-100" id="loginBtn" onClick={register}>Kayıt Ol</button>
         </>
     );
