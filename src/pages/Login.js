@@ -20,7 +20,7 @@ function Login({ sendLoginID, sendLogin }) {
             body: JSON.stringify({ username: username, password: password })
         };
 
-        fetch("http://localhost/server/auth.php", fetchOptions)
+        fetch("http://localhost/telgraf-server/auth.php", fetchOptions)
             .then(res => res.json())
             .then(data => (data.split(" ")[0] == "OK") ? (sendLogin(true), document.cookie = "userToken=" + data.split(" ")[1]) : setError(data))
     }
@@ -35,7 +35,7 @@ function Login({ sendLoginID, sendLogin }) {
         };
 
         if (document.getElementById("regpassword").value == document.getElementById("regpasswordr").value) {
-            fetch("http://localhost/server/reg.php", fetchOptions)
+            fetch("http://localhost/telgraf-server/reg.php", fetchOptions)
                 .then(res => res.json())
                 .then(data => setError(data))
         } else {

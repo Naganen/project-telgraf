@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Login from "./pages/Login";
+import Mainpage from "./pages/Mainpage";
 import "bootstrap/dist/css/bootstrap.css";
 
 export default function App() {
@@ -13,8 +14,8 @@ export default function App() {
   if (login) {
     return (
       <>
-        <p>Başarıyla giriş yaptın.</p>
-        <button className="btn btn-dark" onClick={logout}>Çıkış Yap</button>
+        <Mainpage logout={logout} />
+        
       </>
     );
   } else {
