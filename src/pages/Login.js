@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Login({ sendLogin }) {
+function Login({ sendLogin, setUser }) {
 
     const [error, setError] = useState("");
     const [panelType, setPanelType] = useState(false);
@@ -21,7 +21,7 @@ function Login({ sendLogin }) {
 
         fetch("http://localhost/telgraf-server/auth.php", fetchOptions)
             .then(res => res.json())
-            .then(data => (data.split(" ")[0] === "OK") ? (sendLogin(true), document.cookie = "userToken=" + data.split(" ")[1]) : setError(data))
+            .then(data => (data !== "Kullanıcı adı ve ya şifre yanlış.") ? (sendLogin(true), document.cookie = "userToken=" + data.usertoken, setUser(data)) : setError(data))
     }
 
     function register() {

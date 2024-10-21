@@ -7,12 +7,11 @@ include "dbconnect.php";
 
 $content = trim(file_get_contents("php://input"));
 $_arr = json_decode($content, true);
-$username = $_arr["username"];
-$password = $_arr["password"];
+$usertoken = $_arr["usertoken"];
 
-if (checkPass($username, $password)) {
-    echo json_encode(getUser($username));
+if (searchUserByToken($usertoken) != false) {
+    echo json_encode(searchUserByToken($usertoken));
 } else {
-    echo json_encode("Kullanıcı adı ve ya şifre yanlış.");
+    echo json_encode("USER NOT FOUND");
 }
 
