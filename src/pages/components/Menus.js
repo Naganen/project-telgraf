@@ -1,4 +1,4 @@
-export function LastChats({data}) {
+export function LastChats({ data }) {
     return (
         <>
             <div className="d-flex justify-content-between">
@@ -11,7 +11,16 @@ export function LastChats({data}) {
     );
 }
 
-export function FriendsList({data}) {
+export function FriendsList({ data }) {
+    const friends = JSON.parse(data).friends.map(friend =>
+        <>
+            <div className="d-flex justify-content-between align-items-center btn btn-outline-dark text-white border-0">
+                <p className="text-white border-0 text-start m-0"><img width="35px" className="img-fluid rounded-3 me-2" src={friend.pp}></img>{friend.username}</p>
+                <p className="border-0 m-0 btn btn-outline-secondary bg-transparent"><i className="fa-solid fa-ellipsis-vertical"></i></p>
+            </div>
+        </>
+    );
+
     return (
         <>
             <div className="d-flex justify-content-between">
@@ -20,11 +29,14 @@ export function FriendsList({data}) {
                     <span title="Yeni Arkadaş Ekle" className="btn btn-outline-success border-0 btn-sm ms-1 bg-transparent" style={{ fontSize: "10px" }}><i className="fa-solid fa-plus"></i></span>
                 </div>
             </div>
+            <div className="d-flex flex-column">{friends}</div>
         </>
     );
+
+
 }
 
-export function ServerList({data}) {
+export function ServerList({ data }) {
     return (
         <>
             <div className="d-flex justify-content-between">
@@ -38,7 +50,7 @@ export function ServerList({data}) {
     );
 }
 
-export function Notifications({data}) {
+export function Notifications({ data }) {
     return (
         <>
             <div className="d-flex justify-content-between">
@@ -51,3 +63,17 @@ export function Notifications({data}) {
         </>
     );
 }
+
+export function Settings({ data }) {
+    return (
+        <>
+            <div className="d-flex justify-content-between">
+                <h6 className="mt-1">Ayarlar</h6>
+                <div>
+                    <span title="Ayarları Sıfırla" className="btn btn-outline-success border-0 btn-sm ms-1 bg-transparent" style={{ fontSize: "10px" }}><i className="fa-solid fa-arrows-rotate"></i></span>
+                </div>
+            </div>
+        </>
+    );
+}
+

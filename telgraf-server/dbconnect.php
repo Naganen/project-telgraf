@@ -22,6 +22,21 @@ function searchUser($user)
     }
 }
 
+function searchUserByID($userid)
+{
+    global $connect;
+    $sql = "SELECT * FROM users WHERE id = $userid";
+    $result = mysqli_query($connect, $sql);
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $count = mysqli_num_rows($result);
+
+    if ($count == 1) {
+        return $row;
+    } else {
+        return false;
+    }
+}
+
 function searchUserByToken($token) {
     global $connect;
     $sql = "SELECT * FROM users WHERE usertoken = '$token'";

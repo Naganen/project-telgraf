@@ -7,8 +7,7 @@ export default function App() {
   const [login, setLogin] = useState(false);
   const [user, setUser] = useState(null);
 
-
-  function getUserDetails() {
+  if (document.cookie.split("=")[1] !== "" && !login) {
     const fetchOptions = {
       method: 'POST',
       body: JSON.stringify({ usertoken: document.cookie.split("=")[1] })
@@ -17,10 +16,6 @@ export default function App() {
     fetch("http://localhost/telgraf-server/getUserDetails.php", fetchOptions)
       .then(res => res.json())
       .then(data => (data !== "USER NOT FOUND" ? (setLogin(true), setUser(data)) : setLogin(false)))
-  }
-
-  if (document.cookie.split("=")[1] !== "" && !login) {
-    getUserDetails();
   }
 
   function logout() {

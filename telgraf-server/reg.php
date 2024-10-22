@@ -16,14 +16,20 @@ $usertoken = password_hash($username, PASSWORD_DEFAULT);
 
 $sql = "INSERT INTO users(username, password, usertoken) VALUES ('$username', '$hashedpass', '$usertoken')";
 
-if (!searchUser($username)) {
-    if (mysqli_query($connect, $sql) === TRUE) {
-        echo json_encode("Başarıyla kayıt oldun!");
-    } else {
-        echo json_encode("Bir hata oluştu.");
-    }
+if (strlen($username) > 14) {
+    echo json_encode("Kullanıcı adı 14 karakteri geçemez.");
 } else {
-    echo json_encode("Böyle bir kullanıcı mevcut.");
+    if (!searchUser($username)) {
+        if (mysqli_query($connect, $sql) === TRUE) {
+            echo json_encode("Başarıyla kayıt oldun!");
+        } else {
+            echo json_encode("Bir hata oluştu.");
+        }
+    } else {
+        echo json_encode("Böyle bir kullanıcı mevcut.");
+    }
 }
+
+
 
 
