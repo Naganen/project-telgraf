@@ -25,7 +25,7 @@ function searchUser($user)
 function searchUserByID($userid)
 {
     global $connect;
-    $sql = "SELECT * FROM users WHERE id = $userid";
+    $sql = "SELECT id,username,pp FROM users WHERE id = $userid";
     $result = mysqli_query($connect, $sql);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     $count = mysqli_num_rows($result);
@@ -45,6 +45,7 @@ function searchUserByToken($token) {
     $count = mysqli_num_rows($result);
 
     if ($count == 1) {
+        $row['friends'] = getUserFriends($token);
         return $row;
     } else {
         return false;
@@ -68,12 +69,31 @@ function checkPass($user, $pass)
 
 function getUser($user) {
     global $connect;
-    $sql = "SELECT * FROM users WHERE username = '$user'";
+    $sql = "SELECT id,username,pp,usertoken,friends,lastchats,notifications,settings FROM users WHERE username = '$user'";
     $result = mysqli_query($connect, $sql);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
     if (searchUser($user)) {
         return $row;
+    } else {
+        return "";
+    }
+}
+
+function getUserFriends($user) {
+    global $connect;
+    $sql = "SELECT * FROM users WHERE usertoken = '$user'";
+    $result = mysqli_query($connect, $sql);
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    $count = mysqli_num_rows($result);
+
+    if ($count == 1) {
+        $friends = explode(" ", $row['friends']);
+        $friends_data = array();
+        foreach ($friends as $friend) {
+            array_push($friends_data, json_encode(searchUserByID($friend)));
+        }
+        return "[" . implode(",", $friends_data) . "]";
     } else {
         return "";
     }

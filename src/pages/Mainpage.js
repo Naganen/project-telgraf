@@ -29,17 +29,17 @@ function Mainpage({ logout, user }) {
                         </div>
                     </div>
                     <div className="rounded-3 d-flex flex-column justify-content-center align-items-start w-100">
-                        <div className="flex-fill p-3 w-100">
+                        <div className="flex-fill p-2 w-100">
                             {listType === 0 ? <LastChats /> : listType === 1 ? <FriendsList data={user.friends} /> : listType === 2 ? <ServerList /> : listType === 3 ? <Notifications /> : <Settings />}
                         </div>
-                        <div className="bg-dark bg-opacity-50 p-3 w-100 rounded-3 rounded-top-0 rounded-start-0 d-flex justify-content-between align-items-center" style={{ height: "75px" }}>
-                            <div className="d-flex flex-column justify-content-center align-items-start btn btn-outline-dark border-0 text-start" style={{width: "180px", height: "55px"}}>
-                                <h6 title={"User ID: " + user.id} className="fw-normal m-0 text-white">{user.username}</h6>
-                                {isConnected ? <p  className={"fw-lighter m-0 " + (curPing < 100 ? "text-success" : "text-warning")} style={{fontSize: "12px"}}><i className="fa-solid fa-wave-square me-1"></i>{connectedRoom + " " + curPing + "ms"}</p> : <></>}
+                        <div className="bg-dark bg-opacity-50 p-2 w-100 rounded-3 rounded-top-0 rounded-start-0 d-flex justify-content-between align-items-center" style={{ height: "75px" }}>
+                            <div className="d-flex flex-column justify-content-center align-items-start btn btn-outline-dark border-0 text-start" style={{ width: "200px", height: "55px" }}>
+                                <p title={"User ID: " + user.id} className="fw-normal m-0 text-white"><img alt="PP" width="35px" className="img-fluid rounded-3 me-2" src={user.pp}></img>{user.username}</p>
+                                {isConnected ? <p className={"fw-lighter m-0 " + (curPing < 100 ? "text-success" : "text-warning")} style={{ fontSize: "12px" }}><i className="fa-solid fa-wave-square me-1"></i>{connectedRoom + " " + curPing + "ms"}</p> : <></>}
                             </div>
                             <div>
-                                <span className="btn border-0 bg-transparent btn-outline-secondary" onClick={() => setHeadphoneStat(!headphoneStat)}><i className={headphoneStat ? "fa-solid fa-volume-high" : "fa-solid text-danger fa-volume-xmark"} style={{width: "15px"}}></i></span>
-                                <span className="btn border-0 bg-transparent btn-outline-secondary" onClick={() => setMicStat(!micStat)}><i className={micStat ? "fa-solid fa-microphone" : "fa-solid text-danger fa-microphone-slash"} style={{width: "20px"}}></i></span>
+                                <span className="btn border-0 bg-transparent btn-outline-secondary" onClick={() => setHeadphoneStat(!headphoneStat)}><i className={headphoneStat ? "fa-solid fa-volume-high" : "fa-solid text-danger fa-volume-xmark"} style={{ width: "10px" }}></i></span>
+                                <span className="btn border-0 bg-transparent btn-outline-secondary" onClick={() => setMicStat(!micStat)}><i className={micStat ? "fa-solid fa-microphone" : "fa-solid text-danger fa-microphone-slash"} style={{ width: "20px" }}></i></span>
                             </div>
                         </div>
                     </div>

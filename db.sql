@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: localhost
--- Üretim Zamanı: 22 Eki 2024, 12:29:56
+-- Üretim Zamanı: 25 Eki 2024, 11:24:43
 -- Sunucu sürümü: 8.0.17
 -- PHP Sürümü: 7.3.10
 
@@ -32,9 +32,10 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` text NOT NULL,
   `password` text NOT NULL,
+  `pp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '/default.jpg',
   `usertoken` text NOT NULL,
-  `friends` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `lastchats` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `friends` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `lastchats` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `notifications` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `settings` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -43,9 +44,9 @@ CREATE TABLE `users` (
 -- Tablo döküm verisi `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `usertoken`, `friends`, `lastchats`, `notifications`, `settings`) VALUES
-(1, 'naganen', '$2y$10$YDLQlZBoZ4mYjW1FRuQSvexp0xlRG9xJ0hoErIWiwvH.pFnviIkcm', '$2y$10$CFJxI28lY6BePXeicItOhe7srL6LaTZoqygz3ay07QDuYDY.O75AO', '{\"friends\":[{\"id\":1,\"username\":\"naganen\", \"pp\":\"/default.jpg\"},{\"id\":2,\"username\":\"patates\", \"pp\":\"/default.jpg\"}]}', '', '', ''),
-(2, 'patates', '$2y$10$9BEqdJEl8e8/5oYgIhoT9u8wKjCm/Afq9V3y15e/JfZgEcVolSNdK', '$2y$10$iTSNpThYO0247ACSpj0ttutZ3mFaFdQkNLygay1IkoNSOGaWSrZfO', '', '', '', '');
+INSERT INTO `users` (`id`, `username`, `password`, `pp`, `usertoken`, `friends`, `lastchats`, `notifications`, `settings`) VALUES
+(1, 'naganen', '$2y$10$YDLQlZBoZ4mYjW1FRuQSvexp0xlRG9xJ0hoErIWiwvH.pFnviIkcm', '/default.jpg', '$2y$10$CFJxI28lY6BePXeicItOhe7srL6LaTZoqygz3ay07QDuYDY.O75AO', '2', '', '', ''),
+(2, 'patates', '$2y$10$9BEqdJEl8e8/5oYgIhoT9u8wKjCm/Afq9V3y15e/JfZgEcVolSNdK', '/default.jpg', '$2y$10$iTSNpThYO0247ACSpj0ttutZ3mFaFdQkNLygay1IkoNSOGaWSrZfO', '1', '', '', '');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
