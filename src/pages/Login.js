@@ -19,7 +19,7 @@ function Login({ sendLogin, setUser }) {
             body: JSON.stringify({ username: username, password: password })
         };
 
-        fetch("http://localhost/telgraf-server/auth.php", fetchOptions)
+        fetch("http://localhost/projeler/project-telgraf/telgraf-server/auth.php", fetchOptions)
             .then(res => res.json())
             .then(data => (data !== "Kullanıcı adı ve ya şifre yanlış.") ? (sendLogin(true), document.cookie = "userToken=" + data.usertoken, setUser(data)) : setError(data))
     }
@@ -34,7 +34,7 @@ function Login({ sendLogin, setUser }) {
         };
 
         if (document.getElementById("regpassword").value === document.getElementById("regpasswordr").value) {
-            fetch("http://localhost/telgraf-server/reg.php", fetchOptions)
+            fetch("http://localhost/projeler/project-telgraf/telgraf-server/reg.php", fetchOptions)
                 .then(res => res.json())
                 .then(data => setError(data))
         } else {

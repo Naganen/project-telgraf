@@ -1,9 +1,9 @@
 <?php
 
 $dbhost = "localhost";
-$dbuser = "root";
+$dbuser = "naganen";
 $dbpass = "123qweasd";
-$dbname = "db";
+$dbname = "project_telgraf";
 
 $connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 

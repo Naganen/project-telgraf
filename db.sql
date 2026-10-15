@@ -32,13 +32,13 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` text NOT NULL,
   `password` text NOT NULL,
-  `pp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '/default.jpg',
+  `pp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '/default.jpg',
   `usertoken` text NOT NULL,
-  `friends` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `lastchats` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `notifications` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `settings` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `friends` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `lastchats` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `notifications` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `settings` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Tablo döküm verisi `users`
@@ -67,8 +67,39 @@ ALTER TABLE `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `user_profiles`
+--
+
+CREATE TABLE IF NOT EXISTS `user_profiles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `display_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `bio` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `cover_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT '/default_cover.jpg',
+  `global_tag` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `about` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`),
+  CONSTRAINT `fk_user_profiles_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Tablo döküm verisi `user_profiles`
+--
+
+INSERT INTO `user_profiles` (`user_id`, `display_name`, `bio`, `cover_image`, `global_tag`, `about`) VALUES
+(1, 'Naganen', 'Merhaba! Telgraf kullanıyorum.', '/default_cover.jpg', '#yeni', '{\"konum\": \"\", \"dogumTarihi\": \"\", \"websitesi\": \"\"}'),
+(2, 'Patates', 'Merhaba! Telgraf kullanıyorum.', '/default_cover.jpg', '#yeni', '{\"konum\": \"\", \"dogumTarihi\": \"\", \"websitesi\": \"\"}');
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

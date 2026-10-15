@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { LastChats, FriendsList, ServerList, Notifications, Settings } from "./components/Menus";
+import ProfileModal from "./components/ProfileModal";
 
 function Mainpage({ logout, user }) {
 
@@ -7,13 +8,15 @@ function Mainpage({ logout, user }) {
     const [micStat, setMicStat] = useState(true);
     const [headphoneStat, setHeadphoneStat] = useState(true);
 
-    const [isConnected, setIsConnected] = useState(false);
+    const [isConnected] = useState(false);
     // Room name should be less than 15 character. Or it will not fit fields.
-    const [connectedRoom, setConnectedRoom] = useState("Default");
-    const [curPing, setCurPing] = useState(0);
+    const [connectedRoom] = useState("Default");
+    const [curPing] = useState(0);
+    const [showMyProfile, setShowMyProfile] = useState(false);
 
     return (
         <>
+            {showMyProfile && <ProfileModal userId={user.id} onClose={() => setShowMyProfile(false)} editable={true} usertoken={user.usertoken} />}
             <div className="bg-dark rounded-3 d-flex" style={{ height: "97vh", width: "98vw" }}>
                 <div className="bg-dark-subtle rounded-3 d-flex" style={{ width: "370px", height: "100%" }}>
                     <div className="bg-secondary-subtle rounded-3 d-flex flex-column p-3 justify-content-start align-items-center" style={{ width: "80px", height: "100%" }}>
@@ -30,10 +33,10 @@ function Mainpage({ logout, user }) {
                     </div>
                     <div className="rounded-3 d-flex flex-column justify-content-center align-items-start w-100">
                         <div className="flex-fill p-2 w-100">
-                            {listType === 0 ? <LastChats /> : listType === 1 ? <FriendsList data={user.friends} /> : listType === 2 ? <ServerList /> : listType === 3 ? <Notifications /> : <Settings />}
+                            {listType === 0 ? <LastChats /> : listType === 1 ? <FriendsList data={user.friends} usertoken={user.usertoken} /> : listType === 2 ? <ServerList /> : listType === 3 ? <Notifications /> : <Settings />}
                         </div>
                         <div className="bg-dark bg-opacity-50 p-2 w-100 rounded-3 rounded-top-0 rounded-start-0 d-flex justify-content-between align-items-center" style={{ height: "75px" }}>
-                            <div className="d-flex flex-column justify-content-center align-items-start btn btn-outline-dark border-0 text-start" style={{ width: "200px", height: "55px" }}>
+                            <div className="d-flex flex-column justify-content-center align-items-start btn btn-outline-dark border-0 text-start" style={{ width: "200px", height: "55px" }} onClick={() => setShowMyProfile(true)} title="Profilini Görüntüle">
                                 <p title={"User ID: " + user.id} className="fw-normal m-0 text-white"><img alt="PP" width="35px" className="img-fluid rounded-3 me-2" src={user.pp}></img>{user.username}</p>
                                 {isConnected ? <p className={"fw-lighter m-0 " + (curPing < 100 ? "text-success" : "text-warning")} style={{ fontSize: "12px" }}><i className="fa-solid fa-wave-square me-1"></i>{connectedRoom + " " + curPing + "ms"}</p> : <></>}
                             </div>

@@ -13,7 +13,7 @@ export default function App() {
       body: JSON.stringify({ usertoken: document.cookie.split("=")[1] })
     };
 
-    fetch("http://localhost/telgraf-server/getUserDetails.php", fetchOptions)
+    fetch("http://localhost/projeler/project-telgraf/telgraf-server/getUserDetails.php", fetchOptions)
       .then(res => res.json())
       .then(data => (data !== "USER NOT FOUND" ? (setLogin(true), setUser(data)) : setLogin(false)))
   }
@@ -26,7 +26,7 @@ export default function App() {
           body: JSON.stringify({ usertoken: document.cookie.split("=")[1] })
         };
 
-        fetch("http://localhost/telgraf-server/getUserDetails.php", fetchOptions)
+        fetch("http://localhost/projeler/project-telgraf/telgraf-server/getUserDetails.php", fetchOptions)
           .then(res => res.json())
           .then(data => setUser(data))
       }
